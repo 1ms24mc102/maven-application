@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     triggers {
-        cron('* * * * *')
+        cron('* * * * *') // run every minute for testing
     }
 
     environment {
@@ -11,11 +11,16 @@ pipeline {
     }
 
     stages {
-
         stage('Checkout Source Code') {
             steps {
                 git branch: 'main',
                     url: 'https://github.com/1ms24mc102/maven-application.git'
+            }
+        }
+
+        stage('Build Maven Project') {
+            steps {
+                sh 'mvn clean package -DskipTests'
             }
         }
 
