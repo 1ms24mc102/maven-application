@@ -1,9 +1,14 @@
+# Use OpenJDK 17
 FROM openjdk:17-jdk-slim
 
+# Set working directory
 WORKDIR /app
 
+# Copy the built jar into container
 COPY target/*.jar app.jar
 
-EXPOSE 9000
+# Expose the port Spring Boot runs on
+EXPOSE 8080
 
+# Run the jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
